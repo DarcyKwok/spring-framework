@@ -51,6 +51,7 @@ import org.springframework.core.io.ResourceLoader;
  * @see org.springframework.context.ApplicationContext
  * @see org.springframework.context.ResourceLoaderAware
  */
+// 在ResourceLoader的基础上增加支持表达式加载资源，可返回多个Resource
 public interface ResourcePatternResolver extends ResourceLoader {
 
 	/**

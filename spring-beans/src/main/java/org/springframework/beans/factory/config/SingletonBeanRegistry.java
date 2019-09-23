@@ -32,6 +32,7 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.beans.factory.support.DefaultSingletonBeanRegistry
  * @see org.springframework.beans.factory.support.AbstractBeanFactory
  */
+// 定义单例的注册和获取
 public interface SingletonBeanRegistry {
 
 	/**
@@ -53,7 +54,7 @@ public interface SingletonBeanRegistry {
 	 * @param singletonObject the existing singleton object
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet
 	 * @see org.springframework.beans.factory.DisposableBean#destroy
-	 * @see org.springframework.beans.factory.support.BeanDefinitionRegistry#registerBeanDefinition
+	 * @see org.springframework.beans.factory.support.BeanDefinitionRegistry#register  BeanDefinition
 	 */
 	void registerSingleton(String beanName, Object singletonObject);
 

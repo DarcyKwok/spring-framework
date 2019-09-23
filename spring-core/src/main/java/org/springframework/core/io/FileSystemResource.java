@@ -54,6 +54,7 @@ import org.springframework.util.StringUtils;
  * @see java.io.File
  * @see java.nio.file.Files
  */
+// 处理文件类型的资源，支持File和Url形式，可对资源进行写入，在Spring5.0以后使用NIO2来提高性能
 public class FileSystemResource extends AbstractResource implements WritableResource {
 
 	private final String path;

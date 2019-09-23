@@ -180,6 +180,7 @@ import org.springframework.util.StringUtils;
  * @see org.springframework.core.io.ResourceLoader#getResource(String)
  * @see ClassLoader#getResources(String)
  */
+// ResourcePatternResolver接口的具体实现，可以返回多个Resource
 public class PathMatchingResourcePatternResolver implements ResourcePatternResolver {
 
 	private static final Log logger = LogFactory.getLog(PathMatchingResourcePatternResolver.class);

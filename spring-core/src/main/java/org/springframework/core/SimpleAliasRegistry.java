@@ -38,6 +38,7 @@ import org.springframework.util.StringValueResolver;
  * @author Juergen Hoeller
  * @since 2.5.2
  */
+// 实现AliasRegistry接口，主要使用map对alias进行缓存
 public class SimpleAliasRegistry implements AliasRegistry {
 
 	/** Logger available to subclasses. */

@@ -29,6 +29,7 @@ import org.springframework.lang.Nullable;
  * @since 4.3
  * @see DefaultResourceLoader#addProtocolResolver
  */
+// 自定义资源加载协议接口，是DefaultResourceLoader的SPI
 @FunctionalInterface
 public interface ProtocolResolver {
 

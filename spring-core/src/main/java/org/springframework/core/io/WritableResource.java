@@ -29,6 +29,7 @@ import java.nio.channels.WritableByteChannel;
  * @since 3.1
  * @see java.io.OutputStream
  */
+// 在Resource接口上拓展了可写入的功能（可获得OutputStream）
 public interface WritableResource extends Resource {
 
 	/**

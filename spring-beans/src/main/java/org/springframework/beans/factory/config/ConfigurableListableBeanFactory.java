@@ -39,6 +39,8 @@ import org.springframework.lang.Nullable;
  * @since 03.11.2003
  * @see org.springframework.context.support.AbstractApplicationContext#getBeanFactory()
  */
+// 综合了ListableBeanFactory、AutowireCapableBeanFactory、ConfigurableBeanFactory的功能，
+// （bean的配置清单、自动注入、bean的初始化和应用后处理、可配置工厂），增加忽略类型及接口
 public interface ConfigurableListableBeanFactory
 		extends ListableBeanFactory, AutowireCapableBeanFactory, ConfigurableBeanFactory {
 

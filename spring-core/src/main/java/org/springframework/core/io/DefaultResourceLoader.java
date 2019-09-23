@@ -45,11 +45,13 @@ import org.springframework.util.StringUtils;
  * @see FileSystemResourceLoader
  * @see org.springframework.context.support.ClassPathXmlApplicationContext
  */
+// ResourceLoader的默认实现，可根据指定资源位置返回一个Resource
 public class DefaultResourceLoader implements ResourceLoader {
 
 	@Nullable
 	private ClassLoader classLoader;
 
+	// 自定义协议
 	private final Set<ProtocolResolver> protocolResolvers = new LinkedHashSet<>(4);
 
 	private final Map<Class<?>, Map<Resource, ?>> resourceCaches = new ConcurrentHashMap<>(4);
@@ -105,6 +107,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 	 * @since 4.3
 	 * @see #getProtocolResolvers()
 	 */
+	// 通过此方法添加自定义协议
 	public void addProtocolResolver(ProtocolResolver resolver) {
 		Assert.notNull(resolver, "ProtocolResolver must not be null");
 		this.protocolResolvers.add(resolver);
@@ -140,11 +143,14 @@ public class DefaultResourceLoader implements ResourceLoader {
 	}
 
 
+	// TODO 核心方法
 	@Override
 	public Resource getResource(String location) {
 		Assert.notNull(location, "Location must not be null");
 
+		// 通过protocolResolver加载资源
 		for (ProtocolResolver protocolResolver : this.protocolResolvers) {
+			// resolve由子类实现
 			Resource resource = protocolResolver.resolve(location, this);
 			if (resource != null) {
 				return resource;
@@ -152,18 +158,22 @@ public class DefaultResourceLoader implements ResourceLoader {
 		}
 
 		if (location.startsWith("/")) {
+			// 返回ClassPathContextResource类型
 			return getResourceByPath(location);
 		}
 		else if (location.startsWith(CLASSPATH_URL_PREFIX)) {
+			// 返回ClassPathResource类型
 			return new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());
 		}
 		else {
 			try {
+				// 根据是否为文件 URL ，是则返回 FileUrlResource 类型的资源，否则返回 UrlResource 类型的资源
 				// Try to parse the location as a URL...
 				URL url = new URL(location);
 				return (ResourceUtils.isFileURL(url) ? new FileUrlResource(url) : new UrlResource(url));
 			}
 			catch (MalformedURLException ex) {
+				// 最后，返回 ClassPathContextResource 类型的资源
 				// No URL -> resolve as resource path.
 				return getResourceByPath(location);
 			}
