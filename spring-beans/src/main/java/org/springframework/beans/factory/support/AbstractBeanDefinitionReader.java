@@ -46,12 +46,13 @@ import org.springframework.util.Assert;
  * @since 11.12.2003
  * @see BeanDefinitionReaderUtils
  */
-// 实现类
+// BeanDefinitionReader实现类
 public abstract class AbstractBeanDefinitionReader implements BeanDefinitionReader, EnvironmentCapable {
 
 	/** Logger available to subclasses. */
 	protected final Log logger = LogFactory.getLog(getClass());
 
+	// BeanDefinition的注册中心
 	private final BeanDefinitionRegistry registry;
 
 	@Nullable
@@ -87,6 +88,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 		this.registry = registry;
 
 		// Determine ResourceLoader to use.
+		// 判断是普通的ResourceLoader还是支持表达式的ResourcePatternResolver
 		if (this.registry instanceof ResourceLoader) {
 			this.resourceLoader = (ResourceLoader) this.registry;
 		}
@@ -186,6 +188,7 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 		Assert.notNull(resources, "Resource array must not be null");
 		int count = 0;
 		for (Resource resource : resources) {
+			// 由子类具体实现
 			count += loadBeanDefinitions(resource);
 		}
 		return count;
